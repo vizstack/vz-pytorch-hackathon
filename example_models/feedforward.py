@@ -15,6 +15,4 @@ class SimpleFeedforward(nn.Module):
     def forward(self, x):
         features = torch.sigmoid(self.l2(torch.relu(self.l1(x))))
         y = self.softmax(self.classifier(features))
-        # with vzp.pause():
-        #     vzp.label(y, f"Outputs\nMax: {y.max():.2f}, {y.argmax()}\nMin: {y.min():.2f}, {y.argmin()}")
         return y

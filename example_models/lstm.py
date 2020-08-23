@@ -18,16 +18,19 @@ class LSTM(nn.Module):
         h, c = None, None
         for i in range(x.shape[1]):
             vzp.tick()
+            inputs = x[:, i, :]
+            vzp.name(inputs, f"token{i}")
             if h is None:
-                h, c = self.cell(x[:, i, :])
+                h, c = self.cell(inputs)
             else:
-                h, c = self.cell(x[:, i, :], (h, c))
+                h, c = self.cell(inputs, (h, c))
             vzp.name(h, f"hidden{i}")
             vzp.name(c, f"state{i}")
             with vzp.pause():
-                vzp.tag(h, f"Mean: {h.mean():.2f}")
                 plt.hist(h.detach().numpy().flatten())
                 vzp.tag_image(h, plt_to_bytes())
                 plt.clf()
             outputs.append(h)
-        return torch.stack(outputs, dim=1)
+        y = torch.stack(outputs, dim=1)
+        vzp.name(y, f"output_embeddings")
+        return y
