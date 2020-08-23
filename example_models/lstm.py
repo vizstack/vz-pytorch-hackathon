@@ -22,13 +22,12 @@ class LSTM(nn.Module):
                 h, c = self.cell(x[:, i, :])
             else:
                 h, c = self.cell(x[:, i, :], (h, c))
+            vzp.name(h, f"hidden{i}")
+            vzp.name(c, f"state{i}")
             with vzp.pause():
+                vzp.tag(h, f"Mean: {h.mean():.2f}")
                 plt.hist(h.detach().numpy().flatten())
-                plt.title("Histogram")
-                vzp.tag(h, plt_to_bytes(), "image")
+                vzp.tag_image(h, plt_to_bytes())
                 plt.clf()
-                vzp.tag(h, f"Mean: {h.mean():.2f}", "text")
-                vzp.tag(h, f"Max: {h.max():.2f} (index {h.argmax()})", "text")
-                vzp.tag(h, f"Min: {h.min():.2f} (index {h.argmin()})", "text")
             outputs.append(h)
         return torch.stack(outputs, dim=1)
