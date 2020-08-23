@@ -1,6 +1,7 @@
 torch
 torchvision
 matplotlib
-vizstack
-vz_pytorch
+vizstack-py
+vz-pytorch
 tensorboard
+vz-logger
