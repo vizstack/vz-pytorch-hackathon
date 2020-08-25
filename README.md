@@ -34,3 +34,11 @@ Examples:
   - `lstm.py`: LSTM model and advanced logging (temporal axes, tensor naming, tagging with plots).
   - `tensorboard.py`: Compare to TensorBoard aesthetics and features.
   - `other-logging.py`: Logging diverse kinds of visualizations (graph, text, plots).
+  
+## Code
+The main project code for this hackathon can be found at:
+- vz-pytorch (https://github.com/vizstack/vz-pytorch)
+
+The project also builds upon our other open-source projects:
+- vizstack (https://github.com/vizstack/vizstack)
+- vz-logger (https://github.com/vizstack/vz-logger)
