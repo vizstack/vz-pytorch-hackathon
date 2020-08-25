@@ -4,7 +4,7 @@ import vzpytorch
 import vzlogger
 
 
-# Setup logger for this file.
+# Connect logger for this file.
 vzlogger.connect("http://localhost:4000")
 logger = vzlogger.get_logger("resnet")
 
@@ -15,7 +15,10 @@ x = torch.rand(1, 3, 16, 16)
 # Run model and trace computation graph.
 vzpytorch.start(model)
 y = model(x)
-graph = vzpytorch.stop(model)
+graph = vzpytorch.stop()
 
 # Display graph using logger.
 logger.info(graph)
+
+# Disconnect logger.
+vzlogger.disconnect()

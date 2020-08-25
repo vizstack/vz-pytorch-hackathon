@@ -3,7 +3,7 @@ import torch.nn as nn
 import vzlogger
 import vzpytorch as vzp
 import matplotlib.pyplot as plt
-from .utils import plt_to_base64
+from examples.utils import plt_to_base64
 
 
 class LSTM(nn.Module):
@@ -31,7 +31,7 @@ class LSTM(nn.Module):
         return y
 
 
-# Setup logger for this file.
+# Connect logger for this file.
 vzlogger.connect("http://localhost:4000")
 logger = vzlogger.get_logger("lstm")
 
@@ -40,9 +40,12 @@ model = LSTM()
 x = torch.rand(1, 3, 64)
 
 # Run model and trace computation graph.
-vzpytorch.start(model)
+vzp.start(model)
 y = model(x)
-graph = vzpytorch.stop(model)
+graph = vzp.stop()
 
 # Display graph using logger.
 logger.info(graph)
+
+# Disconnect logger.
+vzlogger.disconnect()

@@ -1,11 +1,36 @@
-# VZ-Pytorch
+# VZ-PyTorch
+## Installation
+
+Run the setup script to create a virtual environment and install the `vz-logger` CLI using npm.
+
+```bash
+> bash setup.sh
+```
+
+Requirements:
+  - python3.7: Python version 3.7 or higher.
+  - virtualenv: Python virtual environment creator.
+  - npm: Node.js package manager to install `@vizstack/vz-logger` (CLI tool).
+
 ## Usage
-First, install dependencies and launch a local logging server by running
+
+In a terminal, start the logger, then open the logging UI in your browser at `http://localhost:4000`.
+
 ```bash
-bash setup.sh
+> vz-logger
 ```
-Then, open `http://localhost:4000` in your browser to begin viewing logs. You can generate logs by running
+
+Within the virtual environemnt, run any of the example scripts:
+
 ```bash
-python run_example.py --model lstm
+> source venv/bin/activate
+> python3 examples/feedforward.py
 ```
-The `--model` argument currently supports `feedforward`, `lstm`, `resnet`, and `transformer`.
+
+Examples:
+  - `feedforward.py`: Feedforward model and basic logging.
+  - `transformer.py`: Transformer model and basic logging.
+  - `resnet.py`: Built-in model from `torchvision`.
+  - `lstm.py`: LSTM model and advanced logging (temporal axes, tensor naming, tagging with plots).
+  - `tensorboard.py`: Compare to TensorBoard aesthetics and features.
+  - `other-logging.py`: Logging diverse kinds of visualizations (graph, text, plots).

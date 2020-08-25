@@ -3,9 +3,9 @@ import matplotlib.pyplot as plt
 import vizstack as vz
 import vzpytorch
 import vzlogger
-from .utils import plt_to_base64
+from examples.utils import plt_to_base64
 
-# Setup logger for this file.
+# Connect logger for this file.
 vzlogger.connect("http://localhost:4000")
 logger = vzlogger.get_logger("logging")
 
@@ -19,10 +19,13 @@ plot = plt_to_base64()
 plt.clf()
 
 # Display plot and info using logger.
-logger.info(vz.Image(plot))
 logger.info(f"Training complete after {100} steps")
 logger.info(vz.KeyValue({
     "steps": 100,
     "train_acc": "62%",
     "val_acc": "48%",
 }))
+logger.info(vz.Image(plot))
+
+# Disconnect logger.
+vzlogger.disconnect()

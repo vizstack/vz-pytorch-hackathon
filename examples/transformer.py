@@ -4,7 +4,7 @@ import vzpytorch
 import vzlogger
 
 
-# Setup logger for this file.
+# Connect logger for this file.
 vzlogger.connect("http://localhost:4000")
 logger = vzlogger.get_logger("transformer")
 
@@ -16,7 +16,10 @@ x2 = torch.rand(1, 3, 64)
 # Run model and trace computation graph.
 vzpytorch.start(model)
 y = model(x1, x2)
-graph = vzpytorch.stop(model)
+graph = vzpytorch.stop()
 
 # Display graph using logger.
 logger.info(graph)
+
+# Disconnect logger.
+vzlogger.disconnect()

@@ -17,9 +17,9 @@ class Feedforward(nn.Module):
         y = self.softmax(self.classifier(features))
         return y
 
-# Setup logger for this file.
-vzlogger.connect("http://localhost:4000")
+# Connect logger for this file.
 logger = vzlogger.get_logger("feedforward")
+vzlogger.connect("http://localhost:4000")
 
 # Instantiate model and inputs.
 model = Feedforward()
@@ -28,7 +28,10 @@ x = torch.rand(1, 64)
 # Run model and trace computation graph.
 vzpytorch.start(model)
 y = model(x)
-graph = vzpytorch.stop(model)
+graph = vzpytorch.stop()
 
 # Display graph using logger.
 logger.info(graph)
+
+# Disconnect logger.
+vzlogger.disconnect()
