@@ -20,11 +20,11 @@ In a terminal, start the logger, then open the logging UI in your browser at `ht
 > vz-logger
 ```
 
-Within the virtual environemnt, run any of the example scripts:
+Enter the virtual environemnt and run any of the example scripts:
 
 ```bash
 > source venv/bin/activate
-> python3 examples/feedforward.py
+(venv) > python3 examples/feedforward.py
 ```
 
 Examples:
